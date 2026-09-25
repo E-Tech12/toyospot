@@ -2,7 +2,7 @@
 // token, retrying once with a refreshed token on 401, and normalizing
 // errors so callers can just `await` and catch.
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://toyospot.onrender.com'
 
 const ACCESS_KEY = 'toyospot_access_token'
 const REFRESH_KEY = 'toyospot_refresh_token'
