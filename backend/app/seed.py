@@ -16,8 +16,6 @@ CATEGORIES = [
     ("swallows", "Swallows", "\U0001F365"),
     ("soups", "Soups", "\U0001F372"),
     ("proteins", "Proteins", "\U0001F357"),
-    ("drinks", "Drinks", "\U0001F964"),
-    ("pastries", "Pastries", "\U0001F950"),
     ("combo-meals", "Combo Meals", "\U0001F371"),
 ]
 
@@ -40,23 +38,7 @@ FOODS = [
     ("grilled-chicken", "Grilled Chicken", "proteins", 2500, 50, 33, 15, True, True, "/images/chicken.jpg"),
     ("full-chicken", "Whole Roast Chicken", "proteins", 9000, 15, 4, 35, False, False, "/images/fullchicken.jpg"),
     ("assorted-meat", "Assorted Meat", "proteins", 2000, 50, 29, 10, False, False, "/images/meat.jpg"),
-    ("moin-moin", "Moin Moin", "proteins", 1000, 40, 40, 10, False, True, "/images/moinmoin.jpg"),
     ("pomo", "Pomo", "proteins", 1000, 30, 18, 10, False, False, "/images/pomo.jpg"),
-    ("coca-cola", "Coca-Cola (50cl)", "drinks", 600, 100, 80, 1, False, True, "/images/coke.jpg"),
-    ("fanta", "Fanta (50cl)", "drinks", 600, 80, 60, 1, False, False, "/images/fanta.jpg"),
-    ("pepsi", "Pepsi (50cl)", "drinks", 600, 80, 55, 1, False, False, "/images/pepsi.jpg"),
-    ("malt", "Malt (33cl)", "drinks", 700, 60, 40, 1, False, False, "/images/malt.jpg"),
-    ("sobo-drink", "Zobo (50cl)", "drinks", 800, 40, 21, 1, True, True, "/images/sobo.jpg"),
-    ("vitamilk", "Vitamilk", "drinks", 700, 40, 40, 1, False, False, "/images/vitamilk.jpg"),
-    ("vital-water", "Vital Water (75cl)", "drinks", 400, 100, 90, 1, False, False, "/images/vital.jpg"),
-    ("meat-pie", "Meat Pie", "pastries", 800, 60, 44, 5, False, True, "/images/pie.jpg"),
-    ("doughnuts", "Doughnuts", "pastries", 500, 60, 12, 5, False, False, "/images/Doughnuts.jpg"),
-    ("croissant", "Croissant", "pastries", 900, 40, 25, 5, False, False, "/images/croissants.jpg"),
-    ("egg-roll", "Egg Roll", "pastries", 600, 50, 30, 5, False, False, "/images/eggroll.jpg"),
-    ("shawarma-combo", "Chicken Shawarma", "combo-meals", 3200, 40, 27, 15, True, True, "/images/shawarma.jpg"),
-    ("burger-combo", "Toyo Beef Burger", "combo-meals", 3800, 30, 16, 18, False, False, "/images/burger.jpg"),
-    ("pizza-combo", "Personal Pizza", "combo-meals", 4500, 20, 8, 20, False, False, "/images/pizz.jpg"),
-    ("pasta-combo", "Jollof Pasta & Chicken", "combo-meals", 3800, 30, 19, 20, False, False, "/images/pasta.jpg"),
 ]
 
 DESCRIPTIONS = {
@@ -79,20 +61,6 @@ DESCRIPTIONS = {
     "assorted-meat": "A mix of shaki, beef and cow leg simmered in pepper sauce.",
     "moin-moin": "Steamed bean pudding with egg and a hint of pepper.",
     "pomo": "Well-seasoned cow skin, cooked soft and spicy.",
-    "coca-cola": "Chilled and ready.",
-    "fanta": "Chilled and ready.",
-    "pepsi": "Chilled and ready.",
-    "malt": "Chilled malt drink.",
-    "sobo-drink": "House-made hibiscus zobo, lightly spiced.",
-    "vitamilk": "Chilled soy milk drink.",
-    "vital-water": "Chilled table water.",
-    "meat-pie": "Flaky pastry filled with seasoned minced meat and potato.",
-    "doughnuts": "Soft, lightly sugared doughnuts.",
-    "croissant": "Buttery, flaky croissant.",
-    "egg-roll": "A boiled egg wrapped in soft, lightly sweet dough.",
-    "shawarma-combo": "Grilled chicken shawarma wrapped with veggies and sauce.",
-    "burger-combo": "Grilled beef patty, cheese and house sauce in a toasted bun.",
-    "pizza-combo": "A personal-size pizza, baked fresh to order.",
     "pasta-combo": "Smoky jollof-style pasta with grilled chicken.",
 }
 
@@ -150,7 +118,7 @@ def seed():
                     first_name="Toyo",
                     last_name="Admin",
                     email=admin_email,
-                    hashed_password=hash_password(os.environ.get("SEED_ADMIN_PASSWORD", "change-me-now")),
+                    hashed_password=hash_password(os.environ.get("SEED_ADMIN_PASSWORD", "Toyo123")),
                     role=UserRole.admin,
                     is_verified=True,
                 )
