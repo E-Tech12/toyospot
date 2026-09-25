@@ -4,7 +4,7 @@
 // customer session can coexist in the same browser without clobbering each
 // other.
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://toyospot.onrender.com'
 
 const ACCESS_KEY = 'toyospot_admin_access_token'
 const REFRESH_KEY = 'toyospot_admin_refresh_token'
