@@ -14,13 +14,16 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 30
 
-    # SMTP
+    # Email — Brevo HTTP API (works on Render; SMTP ports are blocked)
+    BREVO_API_KEY: str = ""
+    SMTP_FROM_EMAIL: str = "hello@toyospot.ng"
+    SMTP_FROM_NAME: str = "Toyo's Pot"
+
+    # SMTP (legacy — kept for local fallback / reference; not used by email.py anymore)
     SMTP_HOST: str = "smtp.gmail.com"
     SMTP_PORT: int = 587
     SMTP_USERNAME: str = ""
     SMTP_PASSWORD: str = ""
-    SMTP_FROM_EMAIL: str = "hello@toyospot.ng"
-    SMTP_FROM_NAME: str = "Toyo's Pot"
     SMTP_USE_TLS: bool = True
 
     # Web push
