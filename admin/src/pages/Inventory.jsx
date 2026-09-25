@@ -73,7 +73,8 @@ export default function Inventory() {
         <div>
           <h2 className="font-semibold mb-3">Needs attention</h2>
           <div className="bg-surface border border-border rounded-xl2 overflow-hidden">
-            <table className="w-full text-sm">
+            <div className="overflow-x-auto">
+            <table className="w-full text-sm min-w-[520px]">
               <thead>
                 <tr className="border-b border-border text-left text-xs text-muted uppercase tracking-wide">
                   <th className="px-5 py-3 font-medium">Food</th>
@@ -92,6 +93,7 @@ export default function Inventory() {
                 )}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 

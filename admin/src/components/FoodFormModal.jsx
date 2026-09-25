@@ -116,7 +116,7 @@ export default function FoodFormModal({ food, categories, onClose, onSaved }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid sm:grid-cols-2 gap-3">
           <FormField label="Name" value={form.name} onChange={(e) => handleNameChange(e.target.value)} placeholder="Jollof Rice" />
           <FormField
             label="Slug"
@@ -139,7 +139,7 @@ export default function FoodFormModal({ food, categories, onClose, onSaved }) {
           placeholder="Smoky party-style jollof rice..."
         />
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid sm:grid-cols-2 gap-3">
           <SelectField label="Category" value={form.category_slug} onChange={(e) => setForm({ ...form, category_slug: e.target.value })}>
             {categories.map((c) => (
               <option key={c.slug} value={c.slug}>{c.name}</option>
@@ -148,7 +148,7 @@ export default function FoodFormModal({ food, categories, onClose, onSaved }) {
           <FormField label="Price (₦)" type="number" min="1" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid sm:grid-cols-3 gap-3">
           <FormField
             label="Daily quantity"
             type="number"
@@ -173,7 +173,7 @@ export default function FoodFormModal({ food, categories, onClose, onSaved }) {
           />
         </div>
 
-        <div className="flex gap-6">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
           <CheckboxField
             label="Featured on homepage"
             checked={form.is_featured}

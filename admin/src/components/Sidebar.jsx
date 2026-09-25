@@ -11,55 +11,83 @@ const links = [
   { to: '/analytics', label: 'Analytics', icon: AnalyticsIcon }
 ]
 
-export default function Sidebar() {
+export default function Sidebar({ open, onClose }) {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
   return (
-    <aside className="w-64 shrink-0 bg-ink text-cream flex flex-col h-screen sticky top-0">
-      <div className="px-6 py-6 flex items-center gap-2">
-        <span className="w-9 h-9 rounded-full bg-primary text-white grid place-items-center font-display font-semibold">T</span>
-        <div>
-          <p className="font-display text-lg font-semibold leading-tight">Toyo&apos;s Pot</p>
-          <p className="text-[11px] text-cream/50 leading-tight">Admin</p>
-        </div>
-      </div>
+    <>
+      {/* Backdrop -- mobile/tablet only, sits behind the drawer */}
+      <div
+        onClick={onClose}
+        aria-hidden="true"
+        className={`fixed inset-0 z-40 bg-ink/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      />
 
-      <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto">
-        {links.map(({ to, label, end, icon: Icon }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={end}
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                isActive ? 'bg-primary text-white' : 'text-cream/70 hover:bg-white/5 hover:text-cream'
-              }`
-            }
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-ink text-cream flex flex-col shadow-2xl shadow-black/40
+          transform transition-transform duration-300 ease-out
+          lg:sticky lg:top-0 lg:z-auto lg:h-screen lg:w-64 lg:shadow-none lg:translate-x-0
+          ${open ? 'translate-x-0' : '-translate-x-full'}`}
+      >
+        <div className="px-6 py-6 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="w-9 h-9 rounded-full bg-primary text-white grid place-items-center font-display font-semibold">T</span>
+            <div>
+              <p className="font-display text-lg font-semibold leading-tight">Toyo&apos;s Pot</p>
+              <p className="text-[11px] text-cream/50 leading-tight">Admin</p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            aria-label="Close menu"
+            className="lg:hidden w-9 h-9 rounded-full grid place-items-center text-cream/70 hover:bg-white/10 hover:text-cream transition-colors"
           >
-            <Icon />
-            {label}
-          </NavLink>
-        ))}
-      </nav>
-
-      <div className="px-3 py-4 border-t border-white/10">
-        <div className="px-3 py-2 mb-1">
-          <p className="text-sm font-medium truncate">{user?.first_name} {user?.last_name}</p>
-          <p className="text-xs text-cream/50 truncate">{user?.email}</p>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M6 6l12 12M6 18L18 6" />
+            </svg>
+          </button>
         </div>
-        <button
-          onClick={async () => {
-            await logout()
-            navigate('/login')
-          }}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-cream/70 hover:bg-white/5 hover:text-cream transition-colors"
-        >
-          <LogoutIcon />
-          Log out
-        </button>
-      </div>
-    </aside>
+
+        <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto">
+          {links.map(({ to, label, end, icon: Icon }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              onClick={onClose}
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  isActive ? 'bg-primary text-white' : 'text-cream/70 hover:bg-white/5 hover:text-cream'
+                }`
+              }
+            >
+              <Icon />
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="px-3 py-4 border-t border-white/10">
+          <div className="px-3 py-2 mb-1">
+            <p className="text-sm font-medium truncate">{user?.first_name} {user?.last_name}</p>
+            <p className="text-xs text-cream/50 truncate">{user?.email}</p>
+          </div>
+          <button
+            onClick={async () => {
+              await logout()
+              navigate('/login')
+            }}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-cream/70 hover:bg-white/5 hover:text-cream transition-colors"
+          >
+            <LogoutIcon />
+            Log out
+          </button>
+        </div>
+      </aside>
+    </>
   )
 }
 
