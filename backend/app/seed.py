@@ -16,6 +16,8 @@ CATEGORIES = [
     ("swallows", "Swallows", "\U0001F365"),
     ("soups", "Soups", "\U0001F372"),
     ("proteins", "Proteins", "\U0001F357"),
+    ("drinks", "Drinks", "\U0001F964"),
+    ("pastries", "Pastries", "\U0001F950"),
     ("combo-meals", "Combo Meals", "\U0001F371"),
 ]
 
@@ -35,10 +37,8 @@ FOODS = [
     ("efo-riro", "Efo Riro", "soups", 2800, 35, 14, 15, False, True, "/images/efo.jpg"),
     ("ewedu-soup", "Ewedu Soup", "soups", 1800, 35, 20, 12, False, False, "/images/ewedu.jpg"),
     ("okro-soup", "Okro Soup", "soups", 2500, 30, 5, 15, False, False, "/images/okro.jpg"),
-    ("grilled-chicken", "Grilled Chicken", "proteins", 2500, 50, 33, 15, True, True, "/images/chicken.jpg"),
-    ("full-chicken", "Whole Roast Chicken", "proteins", 9000, 15, 4, 35, False, False, "/images/fullchicken.jpg"),
     ("assorted-meat", "Assorted Meat", "proteins", 2000, 50, 29, 10, False, False, "/images/meat.jpg"),
-    ("pomo", "Pomo", "proteins", 1000, 30, 18, 10, False, False, "/images/pomo.jpg"),
+
 ]
 
 DESCRIPTIONS = {
@@ -56,12 +56,6 @@ DESCRIPTIONS = {
     "efo-riro": "Vegetable soup cooked in a rich palm-oil pepper base.",
     "ewedu-soup": "Silky jute-leaf soup, the classic partner to amala and gbegiri.",
     "okro-soup": "Draw soup made fresh with okra, seafood and assorted meat.",
-    "grilled-chicken": "Marinated and chargrilled chicken, smoky on the outside, juicy inside.",
-    "full-chicken": "A whole roast chicken, great for sharing or a combo order.",
-    "assorted-meat": "A mix of shaki, beef and cow leg simmered in pepper sauce.",
-    "moin-moin": "Steamed bean pudding with egg and a hint of pepper.",
-    "pomo": "Well-seasoned cow skin, cooked soft and spicy.",
-    "pasta-combo": "Smoky jollof-style pasta with grilled chicken.",
 }
 
 

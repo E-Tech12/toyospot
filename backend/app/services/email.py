@@ -1,7 +1,8 @@
+import smtplib
 import logging
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from pathlib import Path
-
-import httpx
 
 from app.config import get_settings
 
@@ -23,49 +24,31 @@ ORDER_STATUS_COPY = {
     "cancelled": ("Order cancelled", "Your order has been cancelled. If you were charged, a refund is on its way."),
 }
 
-BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
-
 
 def _render(body_html: str) -> str:
     return _BASE_TEMPLATE.replace("{{BODY}}", body_html)
 
 
 def _send(to_email: str, subject: str, html_body: str) -> None:
-    """Sends one email via Brevo's HTTP API. Called from FastAPI BackgroundTasks
-    so it never blocks the request/response cycle.
-
-    Brevo's API runs over HTTPS (port 443), which works on Render's free tier.
-    Traditional SMTP (ports 25/465/587) is blocked by Render.
+    """Sends one email over SMTP. Called from FastAPI BackgroundTasks so it
+    never blocks the request/response cycle.
     """
-    if not settings.BREVO_API_KEY:
-        logger.warning("Brevo API key not configured; skipping email '%s' to %s", subject, to_email)
+    if not settings.SMTP_USERNAME or not settings.SMTP_PASSWORD:
+        logger.warning("SMTP not configured; skipping email '%s' to %s", subject, to_email)
         return
 
-    payload = {
-        "sender": {
-            "name": settings.SMTP_FROM_NAME,
-            "email": settings.SMTP_FROM_EMAIL,
-        },
-        "to": [{"email": to_email}],
-        "subject": subject,
-        "htmlContent": _render(html_body),
-    }
-
-    headers = {
-        "accept": "application/json",
-        "api-key": settings.BREVO_API_KEY,
-        "content-type": "application/json",
-    }
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = f"{settings.SMTP_FROM_NAME} <{settings.SMTP_FROM_EMAIL}>"
+    msg["To"] = to_email
+    msg.attach(MIMEText(_render(html_body), "html"))
 
     try:
-        response = httpx.post(BREVO_API_URL, json=payload, headers=headers, timeout=15.0)
-        if response.status_code in (200, 201, 202):
-            logger.info("Sent email '%s' to %s via Brevo", subject, to_email)
-        else:
-            logger.error(
-                "Brevo rejected email '%s' to %s — status %s: %s",
-                subject, to_email, response.status_code, response.text,
-            )
+        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT) as server:
+            if settings.SMTP_USE_TLS:
+                server.starttls()
+            server.login(settings.SMTP_USERNAME, settings.SMTP_PASSWORD)
+            server.sendmail(settings.SMTP_FROM_EMAIL, [to_email], msg.as_string())
     except Exception:
         logger.exception("Failed to send email '%s' to %s", subject, to_email)
 
