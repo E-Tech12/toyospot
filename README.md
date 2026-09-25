@@ -68,6 +68,7 @@ customer list, announcements, and analytics (revenue, orders/day, best
 sellers, customer growth, inventory usage).
 
 **Not wired up (flagged, not hidden):**
+
 - SMTP/VAPID push need real credentials in `backend/.env` before emails or
   push notifications actually send (they no-op safely without them)
 - Supabase Storage needs a public bucket created and
